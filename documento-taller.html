@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexLearn — Taller Ingeniería de Software</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;color:#0f172a;-webkit-font-smoothing:antialiased;padding:0}
+.page{max-width:860px;margin:0 auto;padding:48px 32px}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 60%,#4f46e5 100%);border-radius:20px;padding:48px;margin-bottom:40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-20px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.hero-title{font-family:'DM Serif Display',serif;font-size:42px;color:#fff;line-height:1.15;margin-bottom:12px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;max-width:560px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,.75);margin-top:20px;margin-right:8px}
+
+/* Section titles */
+.section{margin-bottom:48px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6366f1;margin-bottom:8px}
+.section-title{font-size:20px;font-weight:700;color:#0f172a;margin-bottom:20px}
+
+/* Cards */
+.card{background:#fff;border-radius:14px;border:1.5px solid #e2e8f0;padding:24px;margin-bottom:14px}
+.card-sm{background:#fff;border-radius:12px;border:1px solid #e2e8f0;padding:16px 20px;margin-bottom:10px}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:12px 16px;background:#f8fafc;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;border-bottom:2px solid #e2e8f0}
+td{padding:14px 16px;border-bottom:1px solid #f1f5f9;vertical-align:top;color:#334155;line-height:1.65}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8fafc}
+
+/* Pills */
+.pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:11px;font-weight:700}
+.pill-indigo{background:#ede9fe;color:#4338ca}
+.pill-green{background:#d1fae5;color:#065f46}
+.pill-amber{background:#fef3c7;color:#92400e}
+.pill-red{background:#fee2e2;color:#991b1b}
+.pill-blue{background:#dbeafe;color:#1e40af}
+
+/* Grid */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* Metric */
+.metric{background:#fff;border:1.5px solid #e2e8f0;border-radius:14px;padding:20px;text-align:center}
+.metric-val{font-size:28px;font-weight:700;color:#4f46e5;margin-bottom:4px}
+.metric-label{font-size:12px;color:#64748b}
+
+/* Timeline */
+.timeline-item{display:flex;gap:16px;margin-bottom:20px}
+.timeline-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:#fff}
+.tl-1{background:#4f46e5}.tl-2{background:#7c3aed}.tl-3{background:#059669}
+
+/* Know-how */
+.kh-block{border-left:4px solid #4f46e5;padding:16px 20px;background:#f0f4ff;border-radius:0 12px 12px 0;margin-bottom:16px}
+.kh-title{font-size:14px;font-weight:700;color:#3730a3;margin-bottom:6px}
+.kh-body{font-size:13px;color:#4338ca;line-height:1.7}
+
+/* Eval table */
+.eval-row td:first-child{font-weight:600;color:#0f172a}
+.eval-row td:last-child{font-weight:700;color:#4f46e5;text-align:right}
+.eval-total td{font-weight:700;color:#fff;background:#4f46e5}
+.eval-total td:last-child{color:#fff}
+
+/* Decalogo */
+.deca-item{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f1f5f9}
+.deca-num{width:32px;height:32px;border-radius:8px;background:#ede9fe;color:#4f46e5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+@media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr}.hero-title{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <p class="hero-label">Taller · Ingeniería de Software · Parcial</p>
+  <h1 class="hero-title">NexLearn</h1>
+  <p class="hero-sub">Plataforma MVP de e-Learning para Capacitación Corporativa. Formación inteligente, medible y adaptada a las necesidades reales de las organizaciones modernas.</p>
+  <div>
+    <span class="hero-tag">🎓 e-Learning</span>
+    <span class="hero-tag">🏢 Corporativo</span>
+    <span class="hero-tag">📊 MVP</span>
+    <span class="hero-tag">🚀 2024</span>
+  </div>
+</div>
+
+<!-- ══ SECCIÓN 1: TABLA DEL PROYECTO ══ -->
+<div class="section">
+  <p class="section-label">Planificación del Proyecto</p>
+  <h2 class="section-title">Ficha General del Proyecto</h2>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th style="width:28%">Campo</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nombre del Proyecto</strong></td>
+          <td><strong>NexLearn</strong> — Plataforma de Capacitación Corporativa Inteligente</td>
+        </tr>
+        <tr>
+          <td><strong>Eslogan</strong></td>
+          <td><em>"Tu equipo crece. Tu empresa avanza."</em> — Refleja el impacto directo del aprendizaje continuo en los resultados organizacionales.</td>
+        </tr>
+        <tr>
+          <td><strong>Presupuesto Estimado (MVP)</strong></td>
+          <td>
+            <p style="margin-bottom:8px">Total estimado: <strong>$18,500 USD</strong></p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px">
+              <div>• Desarrollo Frontend/Backend: <strong>$8,000</strong></div>
+              <div>• Diseño UI/UX: <strong>$2,500</strong></div>
+              <div>• Infraestructura nube (6 meses): <strong>$1,800</strong></div>
+              <div>• Contenido inicial (4 cursos): <strong>$2,400</strong></div>
+              <div>• QA y pruebas: <strong>$1,200</strong></div>
+              <div>• Marketing y lanzamiento: <strong>$1,500</strong></div>
+              <div>• Contingencia (5%): <strong>$1,100</strong></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Integrantes del Equipo</strong></td>
+          <td>
+            <div style="display:grid;gap:8px;font-size:13px">
+              <div><span class="pill pill-indigo">Product Owner</span> &nbsp;Define visión del producto, prioriza el backlog y representa al cliente. Responsable de la propuesta de valor y el modelo de negocio.</div>
+              <div><span class="pill pill-blue">Tech Lead / Full-Stack</span> &nbsp;Arquitectura del sistema, desarrollo frontend (HTML/CSS/JS, Tailwind) y lógica de negocio. Responsable del código limpio y la separación de capas.</div>
+              <div><span class="pill pill-green">UI/UX Designer</span> &nbsp;Diseño de interfaces, prototipos en Figma, sistema de diseño y flujos de usuario. Garantiza la experiencia "Enterprise Modern".</div>
+              <div><span class="pill pill-amber">QA Engineer</span> &nbsp;Pruebas funcionales, de integración y de usabilidad. Valida flujos de login, progreso, quiz y roles de admin.</div>
+              <div><span class="pill pill-red">Marketing & Growth</span> &nbsp;Estrategia de adquisición B2B, onboarding de empresas cliente y métricas de retención.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Actividades Clave</strong><br><span style="font-size:11px;color:#94a3b8">Checklist</span></td>
+          <td>
+            <div style="font-size:13px;line-height:1.9">
+              <p style="font-weight:700;color:#4f46e5;margin-bottom:6px">📋 Registro de Empresa y Marca</p>
+              ☐ Registro de nombre comercial "NexLearn" ante la cámara de comercio<br>
+              ☐ Solicitud de NIT / RUT empresarial<br>
+              ☐ Registro de marca ante la Superintendencia de Industria y Comercio (SIC)<br>
+              ☐ Apertura de cuenta bancaria empresarial<br>
+              ☐ Política de privacidad y términos de uso redactados y publicados<br>
+              ☐ Dominio web adquirido (nexlearn.co) y hosting configurado<br>
+              <br>
+              <p style="font-weight:700;color:#4f46e5;margin-bottom:6px">🛠 Desarrollo del MVP</p>
+              ☐ Diseño de wireframes y sistema de diseño<br>
+              ☐ Desarrollo del módulo de autenticación con roles<br>
+              ☐ Implementación de 4 cursos con sistema de lecciones y quiz<br>
+              ☐ Vista de administrador con gestión de usuarios<br>
+              ☐ Persistencia con localStorage y lógica de progreso<br>
+              ☐ Pruebas de usabilidad con 5 usuarios reales<br>
+              <br>
+              <p style="font-weight:700;color:#4f46e5;margin-bottom:6px">🚀 Lanzamiento</p>
+              ☐ Prueba piloto con 1 empresa cliente (mínimo 20 empleados)<br>
+              ☐ Recolección de feedback y ajustes<br>
+              ☐ Presentación a potenciales inversores / clientes B2B
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ SECCIÓN 2: ESTRATEGIA DE POSICIONAMIENTO ══ -->
+<div class="section">
+  <p class="section-label">Análisis de Mercado</p>
+  <h2 class="section-title">Estrategia de Posicionamiento y Evaluación de Mercado</h2>
+
+  <!-- Competidores directos -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:14px">🎯 Competidores Directos</h3>
+  <p style="color:#64748b;font-size:13px;margin-bottom:16px">Empresas con productos similares en el segmento de e-Learning corporativo.</p>
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:28px">
+    <table>
+      <thead><tr><th>Empresa</th><th>Propuesta</th><th>Debilidad frente a NexLearn</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Coursera for Business</strong></td>
+          <td>Plataforma masiva con miles de cursos universitarios y de certificación profesional global.</td>
+          <td>Precio elevado (~$400/usuario/año), contenido genérico no adaptado a la cultura corporativa local, sin personalización de rutas por empresa.</td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn Learning</strong></td>
+          <td>Biblioteca de más de 20,000 cursos integrada al ecosistema profesional de LinkedIn.</td>
+          <td>No permite crear cursos propios de la empresa, sin cumplimiento normativo local, reporting limitado para RR.HH.</td>
+        </tr>
+        <tr>
+          <td><strong>TalentLMS</strong></td>
+          <td>LMS (Learning Management System) SaaS enfocado en empresas medianas y grandes.</td>
+          <td>Curva de aprendizaje alta para administradores, onboarding complejo, requiere equipo técnico dedicado para configuración.</td>
+        </tr>
+        <tr>
+          <td><strong>Moodle (Enterprise)</strong></td>
+          <td>Plataforma open-source con enorme comunidad y personalización extrema.</td>
+          <td>Requiere servidores propios, mantenimiento técnico constante, interfaz desactualizada, no apta para empresas sin equipo IT.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Competidores indirectos -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:14px">🔄 Competidores Indirectos</h3>
+  <p style="color:#64748b;font-size:13px;margin-bottom:16px">Alternativas del mercado que resuelven la misma necesidad por otros medios.</p>
+  <div class="grid-2" style="margin-bottom:28px">
+    <div class="card-sm">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:6px">📂 Capacitación presencial tradicional</p>
+      <p style="font-size:12px;color:#64748b;line-height:1.7">Talleres, conferencias y cursos en sala impartidos por consultores externos. Alto costo, sin trazabilidad del aprendizaje y no escalable.</p>
+    </div>
+    <div class="card-sm">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:6px">📊 Google Workspace / Microsoft Teams</p>
+      <p style="font-size:12px;color:#64748b;line-height:1.7">Empresas usan presentaciones y videos en Drive/SharePoint como sustituto informal de un LMS. Sin evaluación, sin progreso, sin certificación.</p>
+    </div>
+    <div class="card-sm">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:6px">🎥 YouTube / Plataformas de video</p>
+      <p style="font-size:12px;color:#64748b;line-height:1.7">Contenido de libre acceso para autoformación. Carece de estructura, seguimiento, cumplimiento normativo y evaluación del aprendizaje.</p>
+    </div>
+    <div class="card-sm">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:6px">📋 Manuales y documentos PDF</p>
+      <p style="font-size:12px;color:#64748b;line-height:1.7">Método más extendido en MiPymes de LATAM. Sin interactividad, tasa de lectura efectiva inferior al 30%, imposible medir la comprensión.</p>
+    </div>
+  </div>
+
+  <!-- Proyección de crecimiento -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:14px">📈 Proyección de Crecimiento (1, 3 y 5 años)</h3>
+  <div class="grid-3" style="margin-bottom:16px">
+    <div class="metric">
+      <div class="metric-val">Año 1</div>
+      <div style="font-size:22px;font-weight:700;color:#0f172a;margin-bottom:6px">$85K</div>
+      <div class="metric-label">Ingresos proyectados ARR</div>
+      <div style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">5 empresas cliente · ~150 usuarios activos · Plan básico $49/usuario/año</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val" style="color:#7c3aed">Año 3</div>
+      <div style="font-size:22px;font-weight:700;color:#0f172a;margin-bottom:6px">$420K</div>
+      <div class="metric-label">Ingresos proyectados ARR</div>
+      <div style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">25 empresas · ~1,200 usuarios · Expansión a 3 países LATAM</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val" style="color:#059669">Año 5</div>
+      <div style="font-size:22px;font-weight:700;color:#0f172a;margin-bottom:6px">$1.8M</div>
+      <div class="metric-label">Ingresos proyectados ARR</div>
+      <div style="margin-top:10px;font-size:12px;color:#475569;line-height:1.6">100+ empresas · 6,000+ usuarios · Módulo IA de rutas adaptativas</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:28px">
+    <div class="timeline-item">
+      <div class="timeline-dot tl-1">1</div>
+      <div>
+        <p style="font-weight:700;font-size:14px;color:#0f172a;margin-bottom:4px">Año 1 — Validación y tracción</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.7">Lanzar el MVP con 5 empresas piloto en sectores de servicios y manufactura en Colombia. Objetivo: 85% de retención de clientes, NPS > 40. Iterar el producto con feedback real. Desarrollar al menos 12 cursos en el catálogo. Gestionar el negocio con equipo de 3 personas (fundadores).</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot tl-2">3</div>
+      <div>
+        <p style="font-weight:700;font-size:14px;color:#0f172a;margin-bottom:4px">Año 3 — Escalabilidad regional</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.7">Expansión a México, Perú y Ecuador. Integración con sistemas HRIS (SAP SuccessFactors, Workday) mediante API. Lanzamiento del módulo de certificaciones verificables (blockchain). Catálogo de 40+ cursos. Equipo de 12 personas. Primera ronda de inversión Seed de $500K USD.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot tl-3">5</div>
+      <div>
+        <p style="font-weight:700;font-size:14px;color:#0f172a;margin-bottom:4px">Año 5 — Liderazgo de mercado LATAM</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.7">Presencia en 8 países de América Latina. Plataforma con IA para rutas de aprendizaje personalizadas. Marketplace de contenido donde consultores externos publican cursos y reciben regalías. 100+ empresas B2B clientes. Consideración de ronda Serie A ($3M+) o adquisición estratégica por actores globales del sector EdTech.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Factores diferenciadores -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:6px">✨ Factores Diferenciadores</h3>
+  <p style="color:#64748b;font-size:13px;margin-bottom:16px"><em>¿Qué hace única nuestra propuesta?</em></p>
+  <div style="margin-bottom:28px">
+    <div class="card-sm" style="border-left:4px solid #4f46e5;border-radius:0 12px 12px 0;margin-bottom:10px">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px">🎯 Enfoque 100% corporativo y normativo</p>
+      <p style="font-size:13px;color:#64748b;line-height:1.65">No somos una plataforma de cursos genéricos. Cada módulo está diseñado para cumplimiento legal (protección de datos, ética, seguridad), reduciendo riesgos operativos reales. Las empresas no compran "cursos", compran cumplimiento y tranquilidad.</p>
+    </div>
+    <div class="card-sm" style="border-left:4px solid #7c3aed;border-radius:0 12px 12px 0;margin-bottom:10px">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px">🏗 Simplicidad de implementación (Zero-IT setup)</p>
+      <p style="font-size:13px;color:#64748b;line-height:1.65">Una empresa puede estar operativa en menos de 24 horas. Sin instalaciones, sin servidores, sin equipo técnico. RR.HH. gestiona todo desde un panel intuitivo. La barrera de entrada es prácticamente nula comparada con TalentLMS o Moodle.</p>
+    </div>
+    <div class="card-sm" style="border-left:4px solid #059669;border-radius:0 12px 12px 0;margin-bottom:10px">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px">📊 Trazabilidad total del aprendizaje</p>
+      <p style="font-size:13px;color:#64748b;line-height:1.65">El dashboard de administrador ofrece visibilidad completa del progreso por empleado, por departamento y por curso. Los datos son auditables, lo que permite presentarlos ante entes reguladores como evidencia de cumplimiento normativo.</p>
+    </div>
+    <div class="card-sm" style="border-left:4px solid #f59e0b;border-radius:0 12px 12px 0">
+      <p style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px">💰 Precio accesible para MiPymes</p>
+      <p style="font-size:13px;color:#64748b;line-height:1.65">Modelo SaaS por usuario desde $4/mes, 10 veces más económico que la capacitación presencial tradicional y 60% más barato que los LMS globales. Diseñado para el mercado LATAM donde el presupuesto de formación es limitado pero la necesidad de cumplimiento es creciente.</p>
+    </div>
+  </div>
+
+  <!-- Know-How -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:6px">🧠 Aplicación del Know-How</h3>
+  <p style="color:#64748b;font-size:13px;margin-bottom:20px"><em>Conocimientos y experiencia como ventaja competitiva</em></p>
+
+  <div class="kh-block">
+    <p class="kh-title">1. Conocimiento en Ingeniería de Software Aplicada</p>
+    <p class="kh-body">El equipo fundador domina el ciclo completo de desarrollo de software: desde el levantamiento de requerimientos hasta el despliegue en producción. La separación en capas (Datos → Lógica → Vista), el uso de localStorage como mecanismo de persistencia sin backend en el MVP, y la arquitectura modular (auth.js, storage.js, dashboard.js, learning.js) no son decisiones arbitrarias: reflejan principios sólidos de ingeniería como el Single Responsibility Principle y la escalabilidad desde el día 1. Esto permite iterar el producto con velocidad y sin deuda técnica acumulada.</p>
+  </div>
+
+  <div class="kh-block">
+    <p class="kh-title">2. Comprensión Profunda del Problema del Cliente Corporativo</p>
+    <p class="kh-body">Existe un conocimiento íntimo de los puntos de dolor de los departamentos de RR.HH. y Cumplimiento en empresas LATAM: la obligación normativa de demostrar formación ante entes reguladores, la dificultad de hacer seguimiento manual del progreso de decenas de empleados, y la frustración con herramientas complejas o costosas. Este conocimiento se materializa en decisiones de producto concretas: el panel de administrador muestra exactamente lo que un jefe de RR.HH. necesita ver, el sistema de certificados responde a la necesidad de evidencia auditable, y los cursos de Protección de Datos, Ética y Seguridad cubren los requisitos legales más frecuentes en Colombia y LATAM.</p>
+  </div>
+
+  <div class="kh-block">
+    <p class="kh-title">3. Dominio del Diseño de Experiencias de Aprendizaje Efectivas</p>
+    <p class="kh-body">La arquitectura pedagógica de NexLearn no es intuitiva: está sustentada en principios de instrucción comprobados. El ciclo Señal → Anhelo → Respuesta → Recompensa (Hábitos atómicos aplicados al e-learning) se refleja en el flujo de cada lección: el progreso visible genera la señal, el desbloqueo del siguiente módulo crea el anhelo, el quiz simplificado define la respuesta, y el certificado y las medallas constituyen la recompensa. Este diseño aumenta la tasa de completación de cursos en un 40-60% comparado con LMS que simplemente listan videos sin estructura motivacional.</p>
+  </div>
+
+  <div class="kh-block">
+    <p class="kh-title">4. Visión Estratégica de Negocio B2B SaaS en LATAM</p>
+    <p class="kh-body">El equipo comprende las dinámicas del modelo SaaS aplicado al mercado B2B latinoamericano: ciclos de venta más largos que B2C, decisiones de compra centralizadas en RR.HH. o Gerencia General, alta sensibilidad al precio, y preferencia por relaciones de confianza sobre transacciones digitales anónimas. Por ello, la estrategia de go-to-market prioriza el contacto directo con gerentes de RR.HH. a través de redes profesionales, demos personalizadas y pruebas piloto gratuitas de 30 días. Este conocimiento del proceso de venta B2B evita los errores más comunes de startups EdTech que construyen para el usuario final (empleado) pero olvidan que quien paga es la empresa.</p>
+  </div>
+
+  <div class="kh-block">
+    <p class="kh-title">5. Experiencia en Gestión de Proyectos Ágiles e Iteración Rápida</p>
+    <p class="kh-body">La construcción del MVP en ciclos cortos (sprints de 2 semanas) con entregables funcionales en cada iteración demuestra la capacidad de aplicar metodologías ágiles en condiciones reales. El prototipo funcional presentado en este parcial —con autenticación por roles, persistencia de datos, vista de administrador, sistema de quiz y gestión de progreso— no es un mockup estático sino código funcional ejecutable en el navegador, validando la hipótesis central del negocio sin inversión en infraestructura. Esta capacidad de construir rápido y aprender rápido es la ventaja competitiva más difícil de replicar por competidores con estructuras organizacionales más lentas.</p>
+  </div>
+</div>
+
+<!-- ══ SECCIÓN 3: CRITERIOS DE EVALUACIÓN ══ -->
+<div class="section">
+  <p class="section-label">Rúbrica</p>
+  <h2 class="section-title">Criterios de Evaluación del Taller</h2>
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:28px">
+    <table>
+      <thead><tr><th>Criterio</th><th style="text-align:right">Puntos</th></tr></thead>
+      <tbody>
+        <tr class="eval-row"><td>Claridad y coherencia en la idea del proyecto</td><td style="text-align:right;font-weight:700;color:#4f46e5">20 pts</td></tr>
+        <tr class="eval-row"><td>Definición del modelo de negocio y planificación estratégica</td><td style="text-align:right;font-weight:700;color:#4f46e5">20 pts</td></tr>
+        <tr class="eval-row"><td>Análisis de mercado y proyección de crecimiento</td><td style="text-align:right;font-weight:700;color:#4f46e5">20 pts</td></tr>
+        <tr class="eval-row"><td>Diseño y presentación profesional del proyecto</td><td style="text-align:right;font-weight:700;color:#4f46e5">20 pts</td></tr>
+        <tr class="eval-row"><td>Argumentación basada en el Decálogo de Fundamentos de Gerencia</td><td style="text-align:right;font-weight:700;color:#4f46e5">20 pts</td></tr>
+        <tr class="eval-total"><td><strong>Total</strong></td><td style="text-align:right"><strong>100 pts</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Decálogo -->
+  <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:16px">📐 Argumentación: Decálogo de Fundamentos de Gerencia</h3>
+  <div class="card">
+    ${[
+      ['Planeación estratégica','NexLearn define objetivos claros por etapa: validación en año 1, escala en año 3, liderazgo en año 5. Cada decisión de producto responde a un objetivo medible.'],
+      ['Organización funcional','El equipo está estructurado en roles complementarios (PO, Tech, Diseño, QA, Growth) con responsabilidades delimitadas, evitando duplicidades y cuellos de botella.'],
+      ['Dirección orientada al cliente','Cada funcionalidad del MVP (panel RR.HH., certificados, progreso visual) fue diseñada a partir de los dolores reales del cliente corporativo, no de supuestos internos.'],
+      ['Control y métricas','KPIs definidos: tasa de completación de cursos, NPS, tasa de retención anual y tiempo de onboarding. El panel de administrador es la herramienta de control en tiempo real.'],
+      ['Toma de decisiones basada en datos','La arquitectura de persistencia (localStorage → futura BD) permite recopilar datos de comportamiento del usuario para priorizar mejoras con evidencia, no intuición.'],
+      ['Innovación continua','Roadmap de innovación claro: certificados en blockchain (año 3), rutas adaptativas con IA (año 5) y marketplace de contenido como evolución del modelo de plataforma.'],
+      ['Gestión del talento humano','El modelo de regalías para consultores externos en el marketplace crea un ecosistema donde el talento externo es un activo, no un costo.'],
+      ['Responsabilidad social y ética','Los cursos de Ética Empresarial y Protección de Datos no son solo productos: son la materialización del compromiso de NexLearn con organizaciones más íntegras y seguras.'],
+      ['Comunicación efectiva','La interfaz de NexLearn privilegia la comunicación clara: estados de progreso visibles, feedback inmediato en quizzes y mensajes motivadores en estados vacíos.'],
+      ['Adaptación al entorno','El modelo de negocio está calibrado para las realidades del mercado LATAM: precios accesibles, implementación sin equipo técnico y cumplimiento con normativas locales.'],
+    ].map(([t,d],i)=>`
+      <div class="deca-item">
+        <div class="deca-num">${i+1}</div>
+        <div><p style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">${t}</p><p style="font-size:13px;color:#64748b;line-height:1.65">${d}</p></div>
+      </div>`).join('')}
+  </div>
+</div>
+
+<div style="text-align:center;padding:32px 0;color:#94a3b8;font-size:12px">
+  NexLearn · Taller Ingeniería de Software · 2024 · Todos los derechos reservados
+</div>
+
+</div>
+</body>
+</html>

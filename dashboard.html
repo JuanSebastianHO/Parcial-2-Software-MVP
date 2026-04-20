@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexLearn — Mis Cursos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="overflow-hidden">
+
+  <div class="app-layout">
+
+    <!-- ── Col 1: Sidenav ── -->
+    <aside id="sidenav"></aside>
+
+    <!-- ── Col 2: Feed central ── -->
+    <main id="main-feed">
+
+      <!-- Header del feed -->
+      <div class="flex items-center justify-between mb-8 animate-fade-in">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900" id="welcome-title">Mis Cursos</h1>
+          <p class="text-slate-500 text-sm mt-0.5" id="welcome-sub">Continúa donde lo dejaste</p>
+        </div>
+        <!-- Toggle sidenav (mobile) -->
+        <button onclick="toggleNav()"
+          class="lg:hidden p-2 rounded-xl border border-slate-200 bg-white text-slate-500 hover:bg-slate-50">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Course grid -->
+      <div id="course-grid" class="animate-fade-in">
+        <div class="col-span-full flex justify-center py-20">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── Col 3: Right panel ── -->
+    <aside id="right-panel"></aside>
+
+  </div>
+
+  <!-- Scripts — orden importa -->
+  <script src="js/courses.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+    const session = requireAuth();
+    if (session) {
+      document.getElementById("welcome-title").textContent = `Hola, ${session.name.split(" ")[0]} 👋`;
+      initDashboard(session);
+    }
+
+    function toggleNav() {
+      document.getElementById("sidenav").classList.toggle("collapsed");
+    }
+  </script>
+</body>
+</html>

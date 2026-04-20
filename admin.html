@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexLearn — Administrador</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="overflow-hidden">
+
+  <div class="app-layout app-layout--admin">
+
+    <!-- ── Col 1: Sidenav ── -->
+    <aside id="sidenav"></aside>
+
+    <!-- ── Col 2: Admin content ── -->
+    <main id="main-feed">
+      <div id="admin-header" class="animate-fade-in"></div>
+      <div id="admin-table" class="animate-fade-in">
+        <div class="flex justify-center py-20"><div class="spinner"></div></div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="js/courses.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/admin.js"></script>
+
+  <script>
+    initAdmin();
+  </script>
+</body>
+</html>
