@@ -1,0 +1,204 @@
+/* ============================================================
+   styles.css — NexLearn Enterprise Modern
+   Glassmorphism sidebar + animaciones + utilidades globales
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Variables ──────────────────────────────────────────────── */
+:root {
+  --bg:          #f8fafc;
+  --card:        #ffffff;
+  --border:      #e2e8f0;
+  --text-1:      #0f172a;
+  --text-2:      #475569;
+  --text-3:      #94a3b8;
+  --accent:      #4f46e5;
+  --accent-dark: #3730a3;
+  --accent-light:#ede9fe;
+  --success:     #10b981;
+  --danger:      #ef4444;
+  --glass-bg:    rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.15);
+  --sidebar-bg:  #1e1b4b;
+  --sidebar-w:   220px;
+  --sidebar-collapsed: 64px;
+  --radius:      16px;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:   0 10px 40px rgba(0,0,0,.12);
+}
+
+/* ── Reset / Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text-1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+img { display: block; }
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.app-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr 280px;
+  grid-template-rows: 100vh;
+  overflow: hidden;
+}
+.app-layout--admin {
+  grid-template-columns: var(--sidebar-w) 1fr;
+}
+
+/* ── Sidebar (Glassmorphism) ────────────────────────────────── */
+#sidenav {
+  background: var(--sidebar-bg);
+  position: relative;
+  overflow: hidden;
+  transition: width .3s ease;
+}
+#sidenav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(99,102,241,.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,92,246,.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+#sidenav .nav-label {
+  transition: opacity .2s, width .2s;
+}
+
+/* Collapsar con la clase .collapsed */
+#sidenav.collapsed { width: var(--sidebar-collapsed); }
+#sidenav.collapsed .nav-label { opacity: 0; width: 0; overflow: hidden; }
+
+/* ── Feed central ───────────────────────────────────────────── */
+#main-feed {
+  overflow-y: auto;
+  height: 100vh;
+  padding: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+#main-feed::-webkit-scrollbar { width: 4px; }
+#main-feed::-webkit-scrollbar-track { background: transparent; }
+#main-feed::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+
+/* ── Panel derecho ──────────────────────────────────────────── */
+#right-panel {
+  overflow-y: auto;
+  height: 100vh;
+  padding: 2rem 1.5rem;
+  border-left: 1px solid var(--border);
+  background: var(--bg);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* ── Course Grid ────────────────────────────────────────────── */
+#course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Spinner ────────────────────────────────────────────────── */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(.8); }
+  60%  { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in   { animation: fadeIn   .4s ease both; }
+.animate-slide-up  { animation: slideUp  .45s ease both; }
+.animate-bounce-in { animation: bounceIn .5s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* Staggered cards */
+.course-card:nth-child(1) { animation-delay: .05s; }
+.course-card:nth-child(2) { animation-delay: .10s; }
+.course-card:nth-child(3) { animation-delay: .15s; }
+.course-card:nth-child(4) { animation-delay: .20s; }
+
+/* ── Prose (lesson content) ─────────────────────────────────── */
+.prose p { margin: 0 0 1rem; color: var(--text-2); font-size: .9375rem; }
+.prose strong { color: var(--text-1); font-weight: 600; }
+
+/* ── Login card ─────────────────────────────────────────────── */
+.login-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+.form-input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  font-family: inherit;
+  font-size: .9375rem;
+  color: var(--text-1);
+  background: var(--bg);
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+}
+.btn-primary {
+  width: 100%;
+  padding: .8rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: .9375rem;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover  { background: var(--accent-dark); }
+.btn-primary:active { transform: scale(.97); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .app-layout {
+    grid-template-columns: var(--sidebar-collapsed) 1fr;
+  }
+  #right-panel { display: none; }
+  #sidenav .nav-label { opacity: 0; width: 0; overflow: hidden; }
+}
+@media (max-width: 640px) {
+  .app-layout { grid-template-columns: 1fr; }
+  #sidenav    { display: none; }
+  #main-feed  { padding: 1.25rem; }
+  #course-grid { grid-template-columns: 1fr; }
+}
